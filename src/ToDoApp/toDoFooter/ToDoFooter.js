@@ -1,7 +1,9 @@
+import './index.css';
+
 function ToDoFooter({toDos, onClearCompleted}) {
     const completed = toDos.filter((toDos) => toDos.isCompleted).length
     return(
-        <div>
+        <div className="footer-container">
             <span>{completed}/{toDos.length} Completed</span>
             <button onClick={onClearCompleted}>Clear Completed</button>
         </div>
@@ -10,3 +12,4 @@ function ToDoFooter({toDos, onClearCompleted}) {
 }
 
 export default ToDoFooter;
+

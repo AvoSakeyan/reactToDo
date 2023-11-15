@@ -1,0 +1,22 @@
+.form-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.add-btn {
+    font-size: 24px;
+    padding: 10px 20px;
+    font-weight: 700;
+    color: #fff;
+    background: #083608;
+    border-radius: 20px;
+}

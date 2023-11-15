@@ -1,4 +1,5 @@
-import ToDoItem from "./toDoItem";
+import ToDoItem from "../toDoItem/toDoItem";
+import './index.css';
 
 function ToDoList({toDos, onChange, onDelete}) {
     return (

@@ -1,8 +1,10 @@
+import './index.css';
+
 function ToDoItem({toDo, onChange, onDelete}) {
     return(
-        <div>
+        <div className="item-container">
             <label>
-                <input type="checkbox" checked={toDo.isCompleted} onChange={(ev) => {
+                <input className="checkbox" type="checkbox" checked={toDo.isCompleted} onChange={(ev) => {
                     onChange({
                         ...toDo,
                         isCompleted: ev.target.checked
@@ -10,7 +12,7 @@ function ToDoItem({toDo, onChange, onDelete}) {
                 }}/>
                 {toDo.text}
             </label>
-            <button onClick={() => {onDelete(toDo)}}>x</button>
+            <button className="delete-btn" onClick={() => {onDelete(toDo)}}>x</button>
         </div>
     )
 }

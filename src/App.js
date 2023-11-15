@@ -1,40 +1,11 @@
 import './App.css';
-import {useReducer} from "react";
-import ToDoList from "./ToDoApp/ToDoList";
-import ToDoForm from "./ToDoApp/ToDoForm";
-import ToDoFooter from "./ToDoApp/ToDoFooter";
-
-function reducer(state, action) {
-    if (action.type === 'add') {
-        return [
-            ...state,
-            {
-                id: Math.random(),
-                text: action.payload.text,
-                isCompleted: false,
-            }
-        ]
-    } else if(action.type === 'delete') {
-        return state.filter((t) => t.id !== action.payload.id)
-    } else if (action.type === 'update') {
-        // Handle the update action
-        return state.map((todo) => {
-            if (todo.id === action.payload.id) {
-                return {
-                    ...todo,
-                    text: action.payload.text, // Update the text
-                    isCompleted: action.payload.isCompleted, // Update the completion status
-                };
-            }
-            return todo;
-        });
-    } else if (action.type === 'clearCompleted') {
-        return state.filter((todo) => !todo.isCompleted);
-    }
-}
+import { useState } from "react";
+import ToDoList from "./ToDoApp/toDoList/ToDoList";
+import ToDoForm from "./ToDoApp/toDoForm/ToDoForm";
+import ToDoFooter from "./ToDoApp/toDoFooter/ToDoFooter";
 
 function App() {
-   const [toDos, dispatch] = useReducer(reducer, [
+    const [toDos, setToDos] = useState([
         {
             id: Math.random(),
             text: "Learn JS",
@@ -55,38 +26,31 @@ function App() {
     return (
     <div className="App">
          <ToDoForm onAdd={(text) => {
-             dispatch({
-                 type: 'add',
-                 payload: {
-                     text: text
+             setToDos([
+                 ...toDos,
+                 {
+                     id: Math.random(),
+                     text: text,
+                     isCompleted: false,
                  }
-             })
-         }}/>git push -u origin main
+             ])
+         }}/>
          <ToDoList
              toDos={toDos}
              onChange={(newTodo) => {
-                 dispatch({
-                     type: 'update',
-                     payload: {
-                         id: newTodo.id,
-                         text: newTodo.text,
-                         isCompleted: newTodo.isCompleted,
+                 setToDos(toDos.map(todo => {
+                     if(todo.id === newTodo.id) {
+                         return newTodo
                      }
-                 });
+                     return todo
+                 }))
              }}
              onDelete={(toDo) => {
-                 dispatch({
-                     type: 'delete',
-                     payload: {
-                         id: toDo.id,
-                     }
-                 })
+                 setToDos(toDos.filter(t => t.id !== toDo.id))
              }}
          />
         <ToDoFooter toDos={toDos} onClearCompleted={() => {
-            dispatch({
-                type: 'clearCompleted'
-            });
+           setToDos(toDos.filter(todo => !todo.isCompleted))
         }}/>
     </div>
 );
