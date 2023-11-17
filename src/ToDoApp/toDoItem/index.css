@@ -1,0 +1,30 @@
+.item-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+label {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    font-weight: 700;
+    color: #083608;
+    border: 2px solid #083608;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.delete-btn {
+    width: 50px;
+    background: #c50d0d;
+    color: white;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+}
+
+.delete-btn:hover {
+    background: #700505;
+    transition: background 0.2s ease-in
+}
