@@ -8,17 +8,17 @@ import { ToDoI } from "./interfaces/todo.interface";
 function App() {
     const [toDos, setToDos] = useState<ToDoI[]>([
         {
-            id: Math.random(),
+            id: 0,
             text: 'Learn JS',
             isCompleted: false,
         },
         {
-            id: Math.random(),
+            id: 1,
             text: 'Learn React',
             isCompleted: false,
         },
         {
-            id: Math.random(),
+            id: 2,
             text: 'Learn Angular',
             isCompleted: false,
         },
@@ -30,7 +30,7 @@ function App() {
         setToDos([
             ...toDos,
             {
-                id: Math.random(),
+                id: toDos.length,
                 text: newText,
                 isCompleted: false,
             },
