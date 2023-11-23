@@ -24,15 +24,18 @@ function App() {
         },
     ]);
 
-    function addToDo(text: string) {
+    const [text, setText] = useState('');
+
+    function addToDo(newText: string) {
         setToDos([
             ...toDos,
             {
                 id: Math.random(),
-                text: text,
+                text: newText,
                 isCompleted: false,
             },
         ]);
+        setText('');
     }
 
     function handleTodoChange(newTodo: ToDoI) {
@@ -54,7 +57,7 @@ function App() {
 
     return (
         <div className="App">
-            <ToDoForm onAdd={addToDo}/>
+            <ToDoForm onAdd={addToDo} text={text} setText={setText}/>
             <ToDoList toDos={toDos} onChange={handleTodoChange} onDelete={handleTodoDelete}/>
             <ToDoFooter toDos={toDos} onClearCompleted={handleClearCompleted}/>
         </div>
