@@ -1,4 +1,4 @@
-export interface TodoForm {
+export interface TodoFormI {
     onAdd: (text: string) => void;
 }
 

@@ -1,9 +1,8 @@
-import ToDoItem from "../toDoItem/toDoItem";
-import './index.css';
+import ToDoItem from "../toDoItem/ToDoItem";
 import React from "react";
-import { ToDoList } from "../../interfaces/todo-list.interface";
+import { ToDoListI } from "../../interfaces/todo-list.interface";
 
-const ToDoList: React.FC<ToDoList> = ({ toDos, onChange, onDelete }) => {
+const ToDoList: React.FC<ToDoListI> = ({ toDos, onChange, onDelete }) => {
     return (
         <div>
             {toDos.map((toDo) => (

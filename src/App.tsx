@@ -3,10 +3,10 @@ import './App.css';
 import ToDoList from './ToDoApp/toDoList/ToDoList';
 import ToDoForm from './ToDoApp/toDoForm/ToDoForm';
 import ToDoFooter from './ToDoApp/toDoFooter/ToDoFooter';
-import { ToDo } from "./interfaces/todo.interface";
+import { ToDoI } from "./interfaces/todo.interface";
 
 function App() {
-    const [toDos, setToDos] = useState<ToDo[]>([
+    const [toDos, setToDos] = useState<ToDoI[]>([
         {
             id: Math.random(),
             text: 'Learn JS',
@@ -24,40 +24,39 @@ function App() {
         },
     ]);
 
+    function addToDo(text: string) {
+        setToDos([
+            ...toDos,
+            {
+                id: Math.random(),
+                text: text,
+                isCompleted: false,
+            },
+        ]);
+    }
+
+    function handleTodoChange(newTodo: ToDoI) {
+        setToDos(toDos.map((todo) => {
+            if (todo.id === newTodo.id) {
+                return newTodo;
+            }
+            return todo;
+        }));
+    }
+
+    function handleTodoDelete(toDo: ToDoI) {
+        setToDos(toDos.filter((t) => t.id !== toDo.id));
+    }
+
+    function handleClearCompleted() {
+        setToDos(toDos.filter((todo) => !todo.isCompleted));
+    }
+
     return (
         <div className="App">
-            <ToDoForm
-                onAdd={(text) => {
-                    setToDos([
-                        ...toDos,
-                        {
-                            id: Math.random(),
-                            text: text,
-                            isCompleted: false,
-                        },
-                    ]);
-                }}
-            />
-            <ToDoList
-                toDos={toDos}
-                onChange={(newTodo) => {
-                    setToDos(toDos.map((todo) => {
-                        if (todo.id === newTodo.id) {
-                            return newTodo;
-                        }
-                        return todo;
-                    }));
-                }}
-                onDelete={(toDo) => {
-                    setToDos(toDos.filter((t) => t.id !== toDo.id));
-                }}
-            />
-            <ToDoFooter
-                toDos={toDos}
-                onClearCompleted={() => {
-                    setToDos(toDos.filter((todo) => !todo.isCompleted));
-                }}
-            />
+            <ToDoForm onAdd={addToDo}/>
+            <ToDoList toDos={toDos} onChange={handleTodoChange} onDelete={handleTodoDelete}/>
+            <ToDoFooter toDos={toDos} onClearCompleted={handleClearCompleted}/>
         </div>
     );
 }

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './index.css';
-import { TodoForm } from "../../interfaces/todo-form.interface";
+import './ToDoForm.css';
+import { TodoFormI } from "../../interfaces/todo-form.interface";
 
-const ToDoForm: React.FC<TodoForm> = ({ onAdd }) => {
+const ToDoForm: React.FC<TodoFormI> = ({ onAdd }) => {
     const [text, setText] = useState('');
 
     return (
@@ -22,7 +22,7 @@ const ToDoForm: React.FC<TodoForm> = ({ onAdd }) => {
                     setText(event.target.value);
                 }}
             />
-            <button className="add-btn" type="submit">
+            <button className="add-btn" type="submit" disabled={text === ''}>
                 Add
             </button>
         </form>
